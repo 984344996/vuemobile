@@ -3,9 +3,9 @@
         <mt-header id="id_header" title="用户登录">
             <mt-button icon="more" title="注册" slot="right"></mt-button>
         </mt-header>
-        <mt-field label="用户名" placeholder="请输入用户名" v-model="username" @input="updateUsername"></mt-field>
-        <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" @input="updatePassword"></mt-field>
-        <mt-button id="id_btnOk" type="primary" size="normal" @onclick="testLogin">登录</mt-button>
+        <mt-field label="用户名" placeholder="请输入用户名" v-model="username" ></mt-field>
+        <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
+        <mt-button id="id_btnOk" type="primary" size="normal" @click="doLogin">登录</mt-button>
     </div>
 </template>
 
@@ -13,25 +13,30 @@
     import {mapState, mapActions} from 'vuex'
     export default {
         name: "index",
+        data(){
+          return {
+              username:'',
+              password:''
+          }
+        },
         methods: {
+            doLogin(){
+                console.error("doLogin");
+                this.actionLogin(this.username, this.password).then(res => {
+                    console.log(res);
+                }).catch(msg => {
+                    console.log(msg);
+                });
+            },
             ...mapActions('Login',[
                 'actionLogin'
             ]),
-            testLogin: function (){
-                console.log('');
-            },
-            updateUsername:(e)=>{
-                this.$store.commit('updateUsername', e.target.value)
-            },
-            updatePassword:(e)=>{
-                this.$store.commit('updatePassword', e.target.value)
-            }
         },
         computed:{
             ...mapState('Login',[
-                'username',
-                'password',
                 'isLoading',
+                'msg',
+                'data'
             ]),
         }
 

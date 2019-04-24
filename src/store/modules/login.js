@@ -1,41 +1,40 @@
 import {dologin} from '../../../src/common/api'
 
 const state = {
-    username:'dengjie',
-    password:'1234',
-    sms:'',
-    isLoading:false,
-    leftTimes:0,
-    errorMessage:''
+    isLoading: false,
+    data:null,
+    msg:null
 };
 
 const mutations = {
-    loginSuccess:(state,payload)=>{
-        state.isloading = false;
-        console.log(payload)
+    setIsLoading:(state,isLoading) => {
+        state.isLoading = isLoading;
     },
-    loginFailed:(state,payload)=>{
-        state.isloading = false;
-        state.errorMessage = payload;
+
+    loginSuccess:(state, data) => {
+        state.data = data;
     },
-    updateUsername:(state,username)=>{
-        state.username = username;
-    },
-    updatePassword:(state,username)=>{
-        state.password = username;
+
+    loginFailed:(state, msg) => {
+        state.msg = msg;
     }
 };
 
 const actions = {
-    actionLogin:(context)=>{
-        console.log(state.username,state.password);
-        dologin({'username':state.username,'password':state.password}).then((suc,data,msg) =>{
+    /// 登录Action
+    actionLogin:(context, username, password)=>{
+        context.commit("setIsLoading",true);
+        return new Promise((resolve, reject) => dologin({'username':username,'password':password}).then((suc,data,msg) =>{
+            context.commit("setIsLoading",false);
+            console.log("actionLogin:",suc);
             if (suc){
                 context.commit('loginSuccess',data);
+                resolve(data);
             }else {
                 context.commit('loginFailed',msg);
+                reject(msg);
             }
-        });
+        }));
     }
 };
 

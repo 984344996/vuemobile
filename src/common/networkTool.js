@@ -16,14 +16,15 @@ export function get(url) {
         return axios.get(baseUrl + url, {
             params
         }).then((res) => {
-            const {errno, data, msg} = res.data;
-            if (errno === ERR_OK) {
+            const {status, data, msg} = res.data;
+            if (status === ERR_OK) {
                 return NetworkResponse(true, data, msg)
             } else {
                 return NetworkResponse(false, null, msg)
             }
         }).catch((e) => {
-            return NetworkResponse(false, null, e.errorMessage.length > 0 ? e.errorMessage : NoNetWorkMsg)
+            console.log(url,"request error:",e.toString());
+            return NetworkResponse(false, null, NoNetWorkMsg)
         })
     }
 }
@@ -33,14 +34,15 @@ export function post(url) {
         return axios.post(baseUrl + url, {
             params
         }).then((res) => {
-            const {errno, data, msg} = res.data;
-            if (errno === ERR_OK) {
+            const {status, data, msg} = res.data;
+            if (status === ERR_OK) {
                 return NetworkResponse(true, data, msg)
             } else {
                 return NetworkResponse(false, null, msg)
             }
         }).catch((e) => {
-            return NetworkResponse(false, null, e.errorMessage.length > 0 ? e.errorMessage : NoNetWorkMsg)
+            console.log(url,"request error:",e.toString());
+            return NetworkResponse(false, null, NoNetWorkMsg)
         })
     }
 }
