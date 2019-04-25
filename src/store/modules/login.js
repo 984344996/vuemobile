@@ -24,9 +24,9 @@ const actions = {
     /// 登录Action
     actionLogin:(context, username, password)=>{
         context.commit("setIsLoading",true);
-        return new Promise((resolve, reject) => dologin({'username':username,'password':password}).then((suc,data,msg) =>{
+        return new Promise((resolve, reject) => dologin({'username':username,'password':password}).then((res) =>{
+            let {suc, data, msg} = res;
             context.commit("setIsLoading",false);
-            console.log("actionLogin:",suc);
             if (suc){
                 context.commit('loginSuccess',data);
                 resolve(data);

@@ -21,7 +21,6 @@
         },
         methods: {
             doLogin(){
-                console.error("doLogin");
                 this.actionLogin(this.username, this.password).then(res => {
                     console.log(res);
                 }).catch(msg => {
