@@ -5,11 +5,11 @@ import store from './store/store'
 import 'mint-ui/lib/style.css'
 import Mint from 'mint-ui';
 
-Vue.config.productionTip = false
-Vue.use(Mint)
+Vue.config.productionTip = false;
+Vue.use(Mint);
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

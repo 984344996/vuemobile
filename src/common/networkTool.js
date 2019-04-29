@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const urlMap = {
-    development: '/',
+    development: 'localhost:8080/',
     production: 'http://ustbhuangyi.com/sell/'
 };
 const baseUrl = urlMap[process.env.NODE_ENV];
