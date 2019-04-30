@@ -24,7 +24,7 @@
         },
         methods: {
             checkInput(){
-                if(this.username.length < 6 || this.password.length < 6) {
+                if(this.username.length < 2 || this.password.length < 2) {
                     this.hitText = '*请检查用户名密码';
                     return false;
                 }
@@ -35,9 +35,10 @@
                     return;
                 }
                 this.actionLogin(this.username, this.password).then(res => {
-                    console.log(res);
+                    ///登录成功
+                    this.$router.push({name:"home"});
                 }).catch(msg => {
-                    console.log(msg);
+                    ///登录失败
                 });
             },
             ...mapActions('Login',[
@@ -59,7 +60,7 @@
                     }else{
                         Indicator.close();
                     }
-                    if (this.msg.length > 0){
+                    if (this.msg && this.msg.length > 0){
                         Toast(this.msg);
                     }
                 },

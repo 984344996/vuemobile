@@ -3,20 +3,24 @@ import {dologin} from '../../../src/common/api'
 const state = {
     isLoading: false,
     data:null,
-    msg:null
+    msg:""
 };
 
 const mutations = {
     setIsLoading:(state,isLoading) => {
+        state.data = null;
         state.isLoading = isLoading;
+        state.msg = "";
     },
 
-    loginSuccess:(state, data) => {
+    loginSuccess:(state, data, msg) => {
         state.data = data;
+        state.msg = msg;
     },
 
     loginFailed:(state, msg) => {
         state.msg = msg;
+        state.data = null;
     }
 };
 
@@ -28,7 +32,7 @@ const actions = {
             let {suc, data, msg} = res;
             context.commit("setIsLoading",false);
             if (suc){
-                context.commit('loginSuccess',data);
+                context.commit('loginSuccess',data, msg);
                 resolve(data);
             }else {
                 context.commit('loginFailed',msg);

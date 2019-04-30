@@ -9,13 +9,17 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
     "mint-ui": "^2.2.13",
+    "mockjs": "^1.0.1-beta3",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1",
-    "mockjs": "^1.0.1-beta3"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",
