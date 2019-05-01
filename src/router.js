@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import {getUser} from "./common/userStorage";
+
 Vue.use(Router);
 
 const  CLogin = () => import('./views/Login');
@@ -27,10 +29,8 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requireAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        let auth = true;
-        if (auth) {
+        let user = getUser();
+        if (user == null) {
             next({
                 path: '/login',
                 query: { redirect: to.path }
@@ -42,4 +42,5 @@ router.beforeEach((to, from, next) => {
         next() // 确保一定要调用 next()
     }
 });
+
 export default router;

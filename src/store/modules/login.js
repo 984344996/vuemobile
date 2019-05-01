@@ -1,4 +1,5 @@
 import {dologin} from '../../../src/common/api'
+import { setUser } from '@/common/userStorage'
 
 const state = {
     isLoading: false,
@@ -32,6 +33,7 @@ const actions = {
             let {suc, data, msg} = res;
             context.commit("setIsLoading",false);
             if (suc){
+                setUser(data);
                 context.commit('loginSuccess',data, msg);
                 resolve(data);
             }else {

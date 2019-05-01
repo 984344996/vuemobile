@@ -10,7 +10,7 @@ const NoNetWorkMsg = '没有网络哟';
 const NetworkResponse = (suc = false, data = null, msg = null) => {
     return {suc, data, msg}
 };
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: baseUrl,
     timeout: 1000 * 10,
     headers: {'Content-Type': 'application/json;charset=utf-8'},// 设置传输内容的类型和编码
